@@ -22,6 +22,11 @@ export default defineNitroConfig({
     routes: ['/', '/password', '/privacy', '/terms'],
   },
 
+  routeRules: {
+    '/github': { redirect: 'https://github.com/riipandi/authweb' },
+    '/x': { redirect: 'https://x.com/intent/follow?screen_name=riipandi' },
+  },
+
   appConfig: {
     baseURL:
       provider === 'cloudflare_pages'
