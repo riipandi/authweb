@@ -43,8 +43,8 @@ importers:
         specifier: ^1.9.4
         version: 1.9.4
       nitropack:
-        specifier: ^2.10.3
-        version: 2.10.3(typescript@5.6.3)
+        specifier: ^2.10.4
+        version: 2.10.4(typescript@5.6.3)
       npm-check-updates:
         specifier: 17.1.10
         version: 17.1.10
@@ -1733,8 +1733,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nitropack@2.10.3:
-    resolution: {integrity: sha512-7n+ITF7RbCMwZZzyacxJ9eMCnWuE60omGJEyLM5PQRKS4Vu5w6OOCvf4C6E3UC0UryFuUIwGbJ3M+tIP9Az9OQ==}
+  nitropack@2.10.4:
+    resolution: {integrity: sha512-sJiG/MIQlZCVSw2cQrFG1H6mLeSqHlYfFerRjLKz69vUfdu0EL2l0WdOxlQbzJr3mMv/l4cOlCCLzVRzjzzF/g==}
     engines: {node: ^16.11.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
@@ -3926,7 +3926,7 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nitropack@2.10.3(typescript@5.6.3):
+  nitropack@2.10.4(typescript@5.6.3):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@netlify/functions': 2.8.2

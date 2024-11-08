@@ -23,6 +23,7 @@ export default defineNitroConfig({
   },
 
   routeRules: {
+    '/author': { redirect: 'https://ripandis.com/?utm_source=authweb' },
     '/github': { redirect: 'https://github.com/riipandi/authweb' },
     '/x': { redirect: 'https://x.com/intent/follow?screen_name=riipandi' },
   },

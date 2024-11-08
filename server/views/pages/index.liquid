@@ -7,7 +7,7 @@
   </div>
 {% endblock %}
 
-<div class="p-8">
+<main class="py-8 px-10">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <!-- Left Column - Input Parameters -->
     <div class="space-y-6">
@@ -128,4 +128,90 @@
       </div>
     </div>
   </div>
-</div>
+</main>
+
+
+{% block 'footerScript' %}
+  <script>
+    // Sample data dan helper functions
+    const sampleData = {
+      secrets: [
+        'HXDMVJECJJWSRB3H',
+        'K3HV4UQJF4BXIU2N',
+        'MFRGGZDFMZTWQ2LK'
+      ],
+      issuers: [
+        'GitHub',
+        'Google',
+        'Microsoft'
+      ],
+      labels: [
+        'admin@company.com',
+        'security@org.com',
+        'user@domain.com'
+      ]
+    };
+
+    // Generate random secret
+    function generateRandomSecret() {
+      const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+      let secret = '';
+      for (let i = 0; i < 16; i++) {
+        secret += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      return secret;
+    }
+
+    // Update form dengan random sample
+    function updateWithRandomSample() {
+      const randomIndex = Math.floor(Math.random() * sampleData.secrets.length);
+      document.getElementById('issuer').value = sampleData.issuers[randomIndex];
+      document.getElementById('label').value = sampleData.labels[randomIndex];
+      document.getElementById('secret').value = sampleData.secrets[randomIndex];
+    }
+
+    // Event listeners
+    document.getElementById('generateSecret').addEventListener('click', () => {
+      document.getElementById('secret').value = generateRandomSecret();
+    });
+
+    // Countdown timer
+    function updateCountdown() {
+      const period = parseInt(document.getElementById('period').value) || 30;
+      const remaining = period - Math.floor(Date.now() / 1000) % period;
+      document.getElementById('countdown').textContent = remaining + 's';
+
+      // Update progress bar
+      const percent = (remaining / period) * 100;
+      document.getElementById('countdown').style.background =
+        `linear-gradient(to right, rgb(124 58 237 / 0.1) ${percent}%, rgb(124 58 237 / 0.05) ${percent}%)`;
+    }
+
+    // Copy functions dengan feedback visual
+    function copyWithFeedback(elementId, buttonId) {
+      const element = document.getElementById(elementId);
+      const button = document.getElementById(buttonId);
+
+      navigator.clipboard.writeText(element.value).then(() => {
+        const originalColor = button.style.color;
+        button.style.color = '#10B981'; // Success color
+        setTimeout(() => {
+          button.style.color = originalColor;
+        }, 1000);
+      });
+    }
+
+    document.getElementById('copyToken').addEventListener('click', () => {
+      copyWithFeedback('totpToken', 'copyToken');
+    });
+
+    document.getElementById('copyUri').addEventListener('click', () => {
+      copyWithFeedback('totpUri', 'copyUri');
+    });
+
+    // Initialize
+    updateWithRandomSample();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+{% endblock %}

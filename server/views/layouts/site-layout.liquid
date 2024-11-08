@@ -35,7 +35,7 @@
               </a>
             </div>
           </div>
-          <div class="bg-white w-full h-10 border-y border-slate-200">
+          <div class="bg-white w-full h-11 border-y border-slate-200">
             <div class="flex justify-between items-center size-full">
               <div class="flex items-center text-sm size-full">
                 <a href="/" class="flex items-center min-w-[140px] w-full justify-center space-x-2 px-4 h-full border-r hover:bg-slate-100 transition-colors bg-white">
@@ -56,98 +56,18 @@
       <!-- Footer -->
       <div class="text-center mt-6 sm:mt-8 space-y-4">
         <div class="text-sm text-gray-500">
-          Made with ❤️ by Aris Ripandi
+          Made with 🤖 by <a href="/author" target="_blank" rel="noopener" class="hover:text-gray-700">Aris Ripandi</a>
         </div>
         <div class="text-sm text-gray-500">
           <a href="/privacy" class="hover:text-gray-700">Privacy Policy</a>
-          <span class="mx-2">•</span>
+          <span class="mx-1">&ndash;</span>
           <a href="/terms" class="hover:text-gray-700">Terms of Service</a>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    // Sample data dan helper functions
-    const sampleData = {
-      secrets: [
-        'HXDMVJECJJWSRB3H',
-        'K3HV4UQJF4BXIU2N',
-        'MFRGGZDFMZTWQ2LK'
-      ],
-      issuers: [
-        'GitHub',
-        'Google',
-        'Microsoft'
-      ],
-      labels: [
-        'admin@company.com',
-        'security@org.com',
-        'user@domain.com'
-      ]
-    };
-
-    // Generate random secret
-    function generateRandomSecret() {
-      const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-      let secret = '';
-      for (let i = 0; i < 16; i++) {
-        secret += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      return secret;
-    }
-
-    // Update form dengan random sample
-    function updateWithRandomSample() {
-      const randomIndex = Math.floor(Math.random() * sampleData.secrets.length);
-      document.getElementById('issuer').value = sampleData.issuers[randomIndex];
-      document.getElementById('label').value = sampleData.labels[randomIndex];
-      document.getElementById('secret').value = sampleData.secrets[randomIndex];
-    }
-
-    // Event listeners
-    document.getElementById('generateSecret').addEventListener('click', () => {
-      document.getElementById('secret').value = generateRandomSecret();
-    });
-
-    // Countdown timer
-    function updateCountdown() {
-      const period = parseInt(document.getElementById('period').value) || 30;
-      const remaining = period - Math.floor(Date.now() / 1000) % period;
-      document.getElementById('countdown').textContent = remaining + 's';
-
-      // Update progress bar
-      const percent = (remaining / period) * 100;
-      document.getElementById('countdown').style.background =
-        `linear-gradient(to right, rgb(124 58 237 / 0.1) ${percent}%, rgb(124 58 237 / 0.05) ${percent}%)`;
-    }
-
-    // Copy functions dengan feedback visual
-    function copyWithFeedback(elementId, buttonId) {
-      const element = document.getElementById(elementId);
-      const button = document.getElementById(buttonId);
-
-      navigator.clipboard.writeText(element.value).then(() => {
-        const originalColor = button.style.color;
-        button.style.color = '#10B981'; // Success color
-        setTimeout(() => {
-          button.style.color = originalColor;
-        }, 1000);
-      });
-    }
-
-    document.getElementById('copyToken').addEventListener('click', () => {
-      copyWithFeedback('totpToken', 'copyToken');
-    });
-
-    document.getElementById('copyUri').addEventListener('click', () => {
-      copyWithFeedback('totpUri', 'copyUri');
-    });
-
-    // Initialize
-    updateWithRandomSample();
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+  <!-- Scripts -->
+  {% block footerScript %}{% endblock %}
 </body>
 </html>

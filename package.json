@@ -32,7 +32,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
-        "nitropack": "^2.10.3",
+        "nitropack": "^2.10.4",
         "npm-check-updates": "17.1.10",
         "typescript": "^5.6.3",
         "wrangler": "^3.85.0"
