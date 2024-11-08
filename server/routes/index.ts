@@ -14,7 +14,8 @@ export default eventHandler((event) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TOTP Generator - ${appConfig.title}</title>
-    <meta name="description" content="Advanced TOTP Generator"/>
+    <meta name="description" content="${appConfig.description}"/>
+    <meta name="author" content="${appConfig.author}" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inter:400,700" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>${analyticsCode}
