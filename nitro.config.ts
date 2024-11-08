@@ -28,5 +28,6 @@ export default defineNitroConfig({
         : 'http://localhost:3000',
     title: 'Auth Web',
     description: 'Online One Time Password (HOTP/TOTP) generator',
+    author: 'Aris Ripandi',
   } as AppConfig,
 })
