@@ -1,7 +1,51 @@
-node_modules
-dist
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# IDE & Editors
+/.fleet
+/.idea
+/.vscode
+
+# OS Generated
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Build & Cache
+/.cache
+/coverage
+*tsbuildinfo
+*.bak
+
+# Database
+*.sqlite*
+*.sqlite3*
+*.libsql
+*.db
+
+# Output
+_data/
 .data
+.dist
 .nitro
-.cache
 .output
-.env
+.client
+.build
+.tmp
+.wrangler
+build/
+dist/
+
+# Environment Variables
+.env.*
+!.env.example
+compose.env*
+!compose.env.example
+
+# Sentry Config File
+.sentryclirc
