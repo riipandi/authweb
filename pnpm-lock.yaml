@@ -20,9 +20,6 @@ importers:
       liquidjs:
         specifier: ^10.18.0
         version: 10.18.0
-      otpauth:
-        specifier: ^9.3.4
-        version: 9.3.4
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -559,10 +556,6 @@ packages:
   '@netlify/serverless-functions-api@1.26.1':
     resolution: {integrity: sha512-q3L9i3HoNfz0SGpTIS4zTcKBbRkxzCRpd169eyiTuk3IwcPC3/85mzLHranlKo2b+HYT0gu37YxGB45aD8A3Tw==}
     engines: {node: '>=18.0.0'}
-
-  '@noble/hashes@1.5.0':
-    resolution: {integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==}
-    engines: {node: ^14.21.3 || >=16}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1830,9 +1823,6 @@ packages:
     peerDependencies:
       typescript: ^5.x
 
-  otpauth@9.3.4:
-    resolution: {integrity: sha512-qXv+lpsCUO9ewitLYfeDKbLYt7UUCivnU/fwGK2OqhgrCBsRkTUNKWsgKAhkXG3aistOY+jEeuL90JEBu6W3mQ==}
-
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
@@ -2798,8 +2788,6 @@ snapshots:
     dependencies:
       '@netlify/node-cookies': 0.1.0
       urlpattern-polyfill: 8.0.2
-
-  '@noble/hashes@1.5.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -4104,10 +4092,6 @@ snapshots:
       yargs-parser: 21.1.1
     transitivePeerDependencies:
       - encoding
-
-  otpauth@9.3.4:
-    dependencies:
-      '@noble/hashes': 1.5.0
 
   package-json-from-dist@1.0.1: {}
 
