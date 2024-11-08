@@ -1,7 +1,13 @@
+import { env } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
 export default eventHandler((event) => {
   const appConfig = useAppConfig(event) as AppConfig
+
+  const analyticsCode = env.CF_PAGES_URL
+    ? '\n\t<script defer data-domain="auth.web.id" src="https://stats.web.id/js/script.js"></script>'
+    : ''
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +17,7 @@ export default eventHandler((event) => {
     <meta name="description" content="Advanced TOTP Generator"/>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inter:400,700" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>${analyticsCode}
 </head>
 <body class="bg-slate-50">
   <div class="min-h-screen p-6 sm:p-10 md:p-12">
