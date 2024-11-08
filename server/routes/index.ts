@@ -46,6 +46,7 @@ export default eventHandler((event) => {
               </div>
 
               <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Label</label>
                 <input type="text" id="label"
                   class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="e.g., john@example.com"
