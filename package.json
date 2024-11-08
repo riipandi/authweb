@@ -20,8 +20,11 @@
     },
     "dependencies": {
         "consola": "^3.2.3",
+        "otpauth": "^9.3.4",
         "pathe": "^1.1.2",
-        "std-env": "^3.7.0"
+        "std-env": "^3.7.0",
+        "uqr": "^0.1.2",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
