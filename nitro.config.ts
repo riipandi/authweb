@@ -13,12 +13,13 @@ export default defineNitroConfig({
 
   output: { dir: resolve('.output') },
   publicAssets: [{ dir: resolve('public') }],
+  serverAssets: [{ baseName: 'views', dir: resolve('server/views') }],
 
   prerender: {
     autoSubfolderIndex: true,
-    crawlLinks: true,
+    crawlLinks: false,
     failOnError: true,
-    routes: ['/'],
+    routes: ['/', '/password', '/privacy', '/terms'],
   },
 
   appConfig: {

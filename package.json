@@ -20,9 +20,13 @@
     },
     "dependencies": {
         "consola": "^3.2.3",
+        "h3": "^1.13.0",
+        "html-minifier": "^4.0.0",
+        "liquidjs": "^10.18.0",
         "otpauth": "^9.3.4",
         "pathe": "^1.1.2",
         "std-env": "^3.7.0",
+        "ufo": "^1.5.4",
         "uqr": "^0.1.2",
         "zod": "^3.23.8"
     },

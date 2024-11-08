@@ -1,8 +1,7 @@
 import { process } from 'std-env'
-import type { AppConfig } from '~/types/config'
 
 export default defineNitroErrorHandler((error, event) => {
-  const appConfig = useAppConfig(event) as AppConfig
+  const appConfig = event.context.appConfig
 
   const formatErrorStack = (stack?: string) => {
     if (!stack) return ''
