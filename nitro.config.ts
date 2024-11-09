@@ -61,7 +61,8 @@ export default defineNitroConfig({
   appConfig: {
     baseURL,
     title: 'Auth Web',
-    description: 'Online One Time Password (HOTP/TOTP) generator',
+    description:
+      'Free online TOTP/HOTP generator and password manager. Create secure one-time passwords and 2FA tokens directly in your browser. Open source, privacy-focused, and no registration required.',
     author: 'Aris Ripandi',
   } as AppConfig,
 })
