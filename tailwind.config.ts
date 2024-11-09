@@ -12,7 +12,7 @@ export default {
         mono: [...fontFamily.mono],
       },
       colors: {
-        gray: colors.slate,
+        gray: colors.gray,
       },
     },
   },

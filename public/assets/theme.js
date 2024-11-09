@@ -1,8 +1,20 @@
 // Check system preference and localStorage
+function syncThemeWithIframe(theme) {
+  // Get all plausible iframes
+  const iframes = document.querySelectorAll('iframe[plausible-embed]');
+  for (const iframe of iframes) {
+    const currentSrc = new URL(iframe.src);
+    currentSrc.searchParams.set('theme', theme);
+    iframe.src = currentSrc.toString();
+  }
+}
+
 if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   document.documentElement.classList.add('dark')
+  syncThemeWithIframe('dark')
 } else {
   document.documentElement.classList.remove('dark')
+  syncThemeWithIframe('light')
 }
 
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -25,8 +37,10 @@ themeToggleBtn.addEventListener('click', function() {
   if (localStorage.theme === 'dark') {
     localStorage.theme = 'light'
     document.documentElement.classList.remove('dark')
+    syncThemeWithIframe('light')
   } else {
     localStorage.theme = 'dark'
     document.documentElement.classList.add('dark')
+    syncThemeWithIframe('dark')
   }
 });
