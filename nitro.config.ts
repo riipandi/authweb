@@ -74,5 +74,6 @@ export default defineNitroConfig({
     description:
       'Free online TOTP/HOTP generator and password manager. Create secure one-time passwords and 2FA tokens directly in your browser. Open source, privacy-focused, and no registration required.',
     author: 'Aris Ripandi',
+    siteDomain: env.PLAUSIBLE_DATA_DOMAIN,
   } as AppConfig,
 })

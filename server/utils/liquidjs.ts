@@ -61,8 +61,8 @@ const MINIFY_OPTIONS: MinifyOptions = {
   removeStyleLinkTypeAttributes: true,
   sortClassName: false,
   useShortDoctype: true,
-  minifyCSS: true,
-  minifyJS: true,
+  minifyCSS: !process.dev,
+  minifyJS: !process.dev,
 } as const
 
 // Template engine instance cache

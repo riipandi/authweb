@@ -3,4 +3,5 @@ export interface AppConfig {
   title: string
   description: string
   author: string
+  siteDomain: string
 }
