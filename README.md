@@ -6,7 +6,9 @@
 
 <p align="center">
   Generate secure TOTP tokens and strong passwords with zero data storage.
-  <br />
+</p>
+
+<p align="center">
   <a href="https://auth.web.id">View Demo</a>
   ·
   <a href="https://github.com/riipandi/authweb/issues">Report Bug</a>
