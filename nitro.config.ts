@@ -1,7 +1,9 @@
 import { writeFile } from 'node:fs/promises'
+import consola from 'consola'
 import { resolve } from 'pathe'
 import type { AcceptedPlugin } from 'postcss'
-import { env, isDevelopment, isProduction, provider } from 'std-env'
+import { isDevelopment, isProduction } from 'std-env'
+import { env, process, provider } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
 const isCloudflarePages = provider === 'cloudflare_pages'
@@ -36,16 +38,19 @@ export default defineNitroConfig({
   },
 
   hooks: {
-    'rollup:before': async () => {
+    compiled: async () => {
+      consola.info('Generating CSS file...')
+
       const { default: postcss } = await import('postcss')
       const { default: tailwindcss } = await import('tailwindcss')
       const { default: autoprefixer } = await import('autoprefixer')
       const { default: cssnano } = await import('cssnano')
 
+      const shouldMinifyCss = isCloudflarePages || !process.dev
       const postCssPlugins: AcceptedPlugin[] = [
         tailwindcss(),
         autoprefixer(),
-        isProduction && cssnano({ preset: 'default' }),
+        shouldMinifyCss && cssnano({ preset: 'default' }),
       ]
 
       const result = await postcss(postCssPlugins.filter(Boolean)).process(
