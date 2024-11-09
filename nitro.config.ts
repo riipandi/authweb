@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs/promises'
-import consola from 'consola'
+import { makeDirectory } from 'make-dir'
 import { resolve } from 'pathe'
 import type { AcceptedPlugin } from 'postcss'
 import { isDevelopment, isProduction } from 'std-env'
@@ -29,11 +29,15 @@ const compileTailwind = async () => {
     { from: undefined }
   )
 
+  // Create assets direcctory for Tailwind CSS output file
+  await makeDirectory(resolve('.output/assets'), { mode: 0o755 })
+  await makeDirectory(resolve('public/assets'), { mode: 0o755 })
+
   // Write the compiled CSS to the public directory
-  await writeFile(resolve('public/styles.css'), result.css)
+  await writeFile(resolve('public/assets/styles.css'), result.css)
 
   // This is required for Cloudflare Pages to serve the CSS file
-  await writeFile(resolve('.output/styles.css'), result.css)
+  await writeFile(resolve('.output/assets/styles.css'), result.css)
 }
 
 /* https://nitro.unjs.io/config */
@@ -57,9 +61,18 @@ export default defineNitroConfig({
   },
 
   routeRules: {
-    '/author': { redirect: 'https://ripandis.com/?utm_source=authweb' },
-    '/github': { redirect: 'https://github.com/riipandi/authweb' },
-    '/x': { redirect: 'https://x.com/intent/follow?screen_name=riipandi' },
+    '/author': {
+      redirect: 'https://ripandis.com/?utm_source=authweb',
+      prerender: false,
+    },
+    '/github': {
+      redirect: 'https://github.com/riipandi/authweb',
+      prerender: false,
+    },
+    '/x': {
+      redirect: 'https://x.com/intent/follow?screen_name=riipandi',
+      prerender: false,
+    },
     '/js/embed.host.js': { proxy: `${plausibleURL}/js/embed.host.js` },
     '/js/script.js': { proxy: `${plausibleURL}/js/script.js` },
     '/api/event': { proxy: `${plausibleURL}/api/event` },

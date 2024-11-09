@@ -51,4 +51,4 @@ compose.env*
 .sentryclirc
 
 # App specific
-public/styles.css
+public/assets/styles.css

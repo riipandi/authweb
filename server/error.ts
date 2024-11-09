@@ -79,7 +79,7 @@ export default defineNitroErrorHandler((error, event) => {
     <title>${error.statusCode} - ${appConfig.title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/assets/styles.css">
     <script defer data-domain="${appConfig.siteDomain}" src="/js/script.js"></script>
   </head>
   <body class="bg-gradient-to-br from-white to-gray-100 min-h-screen flex items-center justify-center p-4">
