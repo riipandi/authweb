@@ -72,3 +72,8 @@ See the [license file](./LICENSE) for more information.
 ---
 
 <sub>🤫 Psst! If you like my work you can support me via [GitHub sponsors](https://github.com/sponsors/riipandi).</sub>
+
+[![Made by](https://badgen.net/badge/icon/Made%20by%20Aris%20Ripandi?icon=bitcoin-lightning&label&color=black&labelColor=black)][riipandi-x]
+
+<!-- link reference definition -->
+[riipandi-x]: https://x.com/intent/follow?screen_name=riipandi
