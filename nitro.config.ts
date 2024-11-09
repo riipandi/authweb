@@ -10,6 +10,32 @@ const isCloudflarePages = provider === 'cloudflare_pages'
 const baseURL = isCloudflarePages ? env.CF_PAGES_URL : 'http://localhost:3000'
 const plausibleURL = env.PLAUSIBLE_BASE_URL
 
+// Create a reusable function for Tailwind compilation
+const compileTailwind = async () => {
+  const { default: postcss } = await import('postcss')
+  const { default: tailwindcss } = await import('tailwindcss')
+  const { default: autoprefixer } = await import('autoprefixer')
+  const { default: cssnano } = await import('cssnano')
+
+  const shouldMinifyCss = isCloudflarePages || !process.dev
+  const postCssPlugins: AcceptedPlugin[] = [
+    tailwindcss(),
+    autoprefixer(),
+    shouldMinifyCss && cssnano({ preset: 'default' }),
+  ]
+
+  const result = await postcss(postCssPlugins.filter(Boolean)).process(
+    '@tailwind base; @tailwind components; @tailwind utilities;',
+    { from: undefined }
+  )
+
+  // Write the compiled CSS to the public directory
+  await writeFile(resolve('public/styles.css'), result.css)
+
+  // This is required for Cloudflare Pages to serve the CSS file
+  await writeFile(resolve('.output/styles.css'), result.css)
+}
+
 /* https://nitro.unjs.io/config */
 export default defineNitroConfig({
   compatibilityDate: '2024-11-08',
@@ -41,30 +67,10 @@ export default defineNitroConfig({
 
   hooks: {
     'rollup:before': async () => {
-      consola.info('Compiling Tailwind CSS file...')
-
-      const { default: postcss } = await import('postcss')
-      const { default: tailwindcss } = await import('tailwindcss')
-      const { default: autoprefixer } = await import('autoprefixer')
-      const { default: cssnano } = await import('cssnano')
-
-      const shouldMinifyCss = isCloudflarePages || !process.dev
-      const postCssPlugins: AcceptedPlugin[] = [
-        tailwindcss(),
-        autoprefixer(),
-        shouldMinifyCss && cssnano({ preset: 'default' }),
-      ]
-
-      const result = await postcss(postCssPlugins.filter(Boolean)).process(
-        '@tailwind base; @tailwind components; @tailwind utilities;',
-        { from: undefined }
-      )
-
-      // Write the compiled CSS to the public directory
-      await writeFile(resolve('public/styles.css'), result.css)
-
-      // This is required for Cloudflare Pages to serve the CSS file
-      await writeFile(resolve('.output/styles.css'), result.css)
+      await compileTailwind()
+    },
+    'dev:reload': async () => {
+      await compileTailwind()
     },
   },
 
