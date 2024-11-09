@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ pageTitle }}</title>
     <meta name="description" content="{{ pageDescription }}"/>
     <meta name="author" content="${appConfig.author}" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inter:400,700" />
+    <title>{{ pageTitle }}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles.css" />
     <script defer data-domain="auth.web.id" src="/js/script.js"></script>
 </head>
-<body class="bg-slate-50">
+<body class="bg-gray-50">
   <div class="min-h-screen p-6 sm:p-10">
     <div class="max-w-4xl mx-auto">
       <div class="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -35,13 +34,13 @@
               </a>
             </div>
           </div>
-          <div class="bg-white w-full h-11 border-y border-slate-200">
+          <div class="bg-white w-full h-11 border-y border-gray-200">
             <div class="flex justify-between items-center size-full">
               <div class="flex items-center text-sm size-full">
-                <a href="/" class="flex items-center min-w-[140px] w-full justify-center space-x-2 px-4 h-full border-r hover:bg-slate-100 transition-colors bg-white">
+                <a href="/" class="flex items-center min-w-[140px] w-full justify-center space-x-2 px-4 h-full border-r hover:bg-gray-100 transition-colors bg-white">
                   TOTP Generator
                 </a>
-                <a href="/password" class="flex items-center min-w-[140px] w-full justify-center space-x-2 px-4 h-full border-r hover:bg-slate-100 transition-colors bg-white">
+                <a href="/password" class="flex items-center min-w-[140px] w-full justify-center space-x-2 px-4 h-full border-r hover:bg-gray-100 transition-colors bg-white">
                   Password Generator
                 </a>
               </div>

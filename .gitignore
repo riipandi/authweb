@@ -49,3 +49,6 @@ compose.env*
 
 # Sentry Config File
 .sentryclirc
+
+# App specific
+public/styles.css

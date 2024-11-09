@@ -1,4 +1,6 @@
+import { writeFile } from 'node:fs/promises'
 import { resolve } from 'pathe'
+import type { AcceptedPlugin } from 'postcss'
 import { env, isDevelopment, isProduction, provider } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
@@ -28,6 +30,29 @@ export default defineNitroConfig({
     '/x': { redirect: 'https://x.com/intent/follow?screen_name=riipandi' },
     '/js/script.js': { proxy: 'https://stats.web.id/js/script.js' },
     '/api/event': { proxy: 'https://stats.web.id/api/event' },
+  },
+
+  hooks: {
+    'rollup:before': async () => {
+      const { default: postcss } = await import('postcss')
+      const { default: tailwindcss } = await import('tailwindcss')
+      const { default: autoprefixer } = await import('autoprefixer')
+      const { default: cssnano } = await import('cssnano')
+
+      const postCssPlugins: AcceptedPlugin[] = [
+        tailwindcss(),
+        autoprefixer(),
+        isProduction && cssnano({ preset: 'default' }),
+      ]
+
+      const result = await postcss(postCssPlugins.filter(Boolean)).process(
+        '@tailwind base; @tailwind components; @tailwind utilities;',
+        { from: undefined }
+      )
+
+      // Write hasil CSS ke public directory
+      await writeFile(resolve('public/styles.css'), result.css)
+    },
   },
 
   appConfig: {
