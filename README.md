@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://auth.web.id">View Demo</a>
+  <a href="https://auth.web.id">Try it Now</a>
   ·
   <a href="https://github.com/riipandi/authweb/issues">Report Bug</a>
   ·
-  <a href="https://github.com/riipandi/authweb/issues">Request Feature</a>
+  <a href="https://github.com/riipandi/authweb/issues">Suggest Feature</a>
 </p>
 
 <p align="center">
