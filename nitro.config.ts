@@ -1,7 +1,8 @@
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'pathe'
 import type { AcceptedPlugin } from 'postcss'
-import { env, isDevelopment, isProduction, provider } from 'std-env'
+import { isDevelopment, isProduction } from 'std-env'
+import { env, process, provider } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
 /* https://nitro.unjs.io/config */
@@ -42,7 +43,7 @@ export default defineNitroConfig({
       const postCssPlugins: AcceptedPlugin[] = [
         tailwindcss(),
         autoprefixer(),
-        isProduction && cssnano({ preset: 'default' }),
+        !process.dev && cssnano({ preset: 'default' }),
       ]
 
       const result = await postcss(postCssPlugins.filter(Boolean)).process(
