@@ -4,5 +4,6 @@ export default defineEventHandler((event) => {
   return renderCachedTemplate(event.context.templateKey, {
     pageTitle: `TOTP Generator - ${appConfig.title}!`,
     pageDescription: appConfig.description,
+    siteAuthor: appConfig.author,
   })
 })

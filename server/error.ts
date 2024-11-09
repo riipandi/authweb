@@ -45,15 +45,42 @@ export default defineNitroErrorHandler((error, event) => {
     )
   }
 
+  const errorCause = error.cause
+    ? `<div class="mt-4 pt-4 border-t border-red-200">
+        <span class="font-semibold text-red-800">Cause:</span>
+        <pre class="text-red-700 mt-2 whitespace-pre-wrap">${formatCause(error.cause)}</pre>
+      </div>`
+    : ''
+
+  const errorDetails = process.dev
+    ? `<div class="space-y-6">
+        <div class="bg-red-50 rounded-lg p-6 overflow-auto max-h-max text-left border border-red-200">
+          <div class="font-mono text-sm leading-relaxed">
+            <div class="mb-2">
+              <span class="font-semibold text-red-800">Error Type:</span>
+              <span class="text-red-700">${error.name}</span>
+            </div>
+            <div class="space-y-1">
+              ${formatErrorStack(error.stack)}
+            </div>
+            ${errorCause}
+          </div>
+        </div>
+      </div>`
+    : ''
+
   const htmlBody = /* html */ `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${appConfig.description}">
+    <meta name="author" content="${appConfig.author}">
     <title>${error.statusCode} - ${appConfig.title}</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/styles.css">
+    <script defer data-domain="auth.web.id" src="/js/script.js"></script>
   </head>
   <body class="bg-gradient-to-br from-white to-gray-100 min-h-screen flex items-center justify-center p-4">
     <main class="max-w-4xl w-full mx-auto bg-white rounded-xl shadow-sm p-8 border border-gray-100">
@@ -68,38 +95,10 @@ export default defineNitroErrorHandler((error, event) => {
           </p>
         </div>
 
-        ${
-          process.dev
-            ? `
-        <div class="space-y-6">
-          <div class="bg-red-50 rounded-lg p-6 overflow-auto max-h-max text-left border border-red-200">
-            <div class="font-mono text-sm leading-relaxed">
-              <div class="mb-2">
-                <span class="font-semibold text-red-800">Error Type:</span>
-                <span class="text-red-700">${error.name}</span>
-              </div>
-              <div class="space-y-1">
-                ${formatErrorStack(error.stack)}
-              </div>
-              ${
-                error.cause
-                  ? `
-              <div class="mt-4 pt-4 border-t border-red-200">
-                <span class="font-semibold text-red-800">Cause:</span>
-                <pre class="text-red-700 mt-2 whitespace-pre-wrap">${formatCause(error.cause)}</pre>
-              </div>
-              `
-                  : ''
-              }
-            </div>
-          </div>
-        </div>
-        `
-            : ''
-        }
+        ${errorDetails}
 
         <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
-          <a href="${appConfig.baseURL}" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-all duration-200 shadow hover:shadow-md w-full">
+          <a href="/" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-all duration-200 shadow hover:shadow-md w-full">
             Return Home
           </a>
           <button onclick="window.location.reload()" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 transition-all duration-200 shadow hover:shadow-md w-full">

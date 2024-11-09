@@ -1,8 +1,7 @@
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'pathe'
 import type { AcceptedPlugin } from 'postcss'
-import { isDevelopment, isProduction } from 'std-env'
-import { env, process, provider } from 'std-env'
+import { env, isDevelopment, isProduction, provider } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
 const isCloudflarePages = provider === 'cloudflare_pages'
@@ -46,7 +45,7 @@ export default defineNitroConfig({
       const postCssPlugins: AcceptedPlugin[] = [
         tailwindcss(),
         autoprefixer(),
-        !process.dev && cssnano({ preset: 'default' }),
+        isProduction && cssnano({ preset: 'default' }),
       ]
 
       const result = await postcss(postCssPlugins.filter(Boolean)).process(
