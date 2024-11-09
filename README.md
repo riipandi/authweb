@@ -56,12 +56,12 @@ For bug reports and feature requests, please use the GitHub Issues with clear de
 
 See our [Contributing Guide](./CONTRIBUTING.md) for detailed guidelines and code of conduct.
 
-## 🙏 Thanks to...
+## Thanks to...
 
 In general, I'd like to thank every single one who open-sources their source code for their
 effort to contribute something to the open-source community. Your work means the world! 🌍 ❤️
 
-## 📝 License
+## License
 
 This project is open-sourced software licensed under the [MIT license](./LICENSE).
 
