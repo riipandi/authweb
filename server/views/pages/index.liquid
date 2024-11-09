@@ -7,18 +7,18 @@
   </div>
 {% endblock %}
 
-<main class="py-8 px-10">
+<main class="py-8 px-10 dark:text-gray-200">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <!-- Left Column - Input Parameters -->
     <div class="space-y-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Configuration</h2>
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Configuration</h2>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Issuer <span class="text-red-500">*</span>
         </label>
         <input type="text" id="issuer"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
           placeholder="e.g., Company Name"
           value="Example Inc."
           required
@@ -27,11 +27,11 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Label <span class="text-red-500">*</span>
         </label>
         <input type="text" id="label"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
           placeholder="e.g., john@example.com"
           value="john@example.com"
           required
@@ -40,17 +40,17 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Secret Key <span class="text-red-500">*</span>
         </label>
         <div class="relative">
           <input type="text" id="secret"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
             placeholder="Enter your secret key"
             required
           />
           <button id="generateSecret"
-            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-violet-600"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-violet-600 dark:hover:text-violet-400"
             title="Generate Random Secret">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
@@ -62,9 +62,9 @@
 
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Algorithm</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Algorithm</label>
           <select id="algorithm"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200">
             <option value="SHA1">SHA1</option>
             <option value="SHA256">SHA256</option>
             <option value="SHA512">SHA512</option>
@@ -72,9 +72,9 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Digits</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Digits</label>
           <select id="digits"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200">
             <option value="6">6 digits</option>
             <option value="8">8 digits</option>
           </select>
@@ -82,26 +82,26 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Period (seconds)</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Period (seconds)</label>
         <input type="number" id="period" value="30" min="10" max="300"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200"
         />
       </div>
     </div>
 
     <!-- Right Column - Output & QR -->
-    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+    <div class="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-6 space-y-6">
       <div>
         <div class="flex justify-between items-center mb-2">
-          <h3 class="text-lg font-semibold text-gray-800">Current Token</h3>
-          <span id="countdown" class="text-sm font-mono bg-violet-100 text-violet-600 px-2 py-1 rounded">30s</span>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Current Token</h3>
+          <span id="countdown" class="text-sm font-mono bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300 px-2 py-1 rounded">30s</span>
         </div>
         <div class="relative">
           <input type="text" id="totpToken" readonly value="000 000"
-            class="w-full px-4 py-3 text-2xl tracking-wider font-mono text-center border border-gray-200 rounded-lg bg-white"
+            class="w-full px-4 py-3 text-2xl tracking-wider font-mono text-center border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-gray-200"
           />
           <button id="copyToken"
-            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-violet-600"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-violet-600 dark:hover:text-violet-400"
             title="Copy Token">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -112,9 +112,9 @@
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">QR Code</h3>
-        <div id="qrcode" class="bg-white p-4 rounded-lg border border-gray-200 flex items-center justify-center relative select-none">
-          <div class="w-48 h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">QR Code</h3>
+        <div id="qrcode" class="bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center relative select-none">
+          <div class="w-48 h-48 bg-gray-100 dark:bg-gray-600 rounded flex items-center justify-center text-gray-400 dark:text-gray-500">
             <img src="/qrcode?chl=otpauth://totp/Example:john@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Example"
               alt="QR Code"
               class="w-48 h-48 pointer-events-none"
@@ -127,15 +127,15 @@
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">TOTP URI</h3>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">TOTP URI</h3>
         <div class="relative">
           <input type="text" id="totpUri" readonly
-            class="w-full pl-4 pr-9 py-2 text-sm font-mono border border-gray-200 rounded-lg bg-white"
+            class="w-full pl-4 pr-9 py-2 text-sm font-mono border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 dark:text-gray-200"
             value=""
             placeholder="otpauth://totp/issuer:account?secret=secretkey&issuer=issuer"
           />
           <button id="copyUri"
-            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-violet-600"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-violet-600 dark:hover:text-violet-400"
             title="Copy URI">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -147,7 +147,6 @@
     </div>
   </div>
 </main>
-
 
 {% block 'footerScript' %}
   {% render 'partials/totp-generator-script' %}

@@ -11,7 +11,7 @@
       secret += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     document.getElementById('secret').value = secret;
-    document.getElementById('secret').classList.remove('border-red-500');
+    document.getElementById('secret').classList.remove('border-red-500', 'dark:border-red-500');
     document.getElementById('secret-error').classList.add('hidden');
     generateTOTP();
     return secret;
@@ -24,10 +24,10 @@
     const isValid = element.value.trim() !== '';
 
     if (!isValid && shouldShowError && !isFirstLoad) {
-      element.classList.add('border-red-500');
+      element.classList.add('border-red-500', 'dark:border-red-500');
       errorElement.classList.remove('hidden');
     } else {
-      element.classList.remove('border-red-500');
+      element.classList.remove('border-red-500', 'dark:border-red-500');
       errorElement.classList.add('hidden');
     }
 
@@ -63,7 +63,7 @@
       document.getElementById('totpToken').value = '000 000';
       document.getElementById('totpUri').value = '';
       document.getElementById('qrcode').innerHTML = `
-        <div class="w-48 h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+        <div class="w-48 h-48 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center text-gray-400 dark:text-gray-500">
           <span class="text-sm text-center px-4">Fill in the required fields to generate QR code</span>
         </div>
       `;
@@ -98,7 +98,7 @@
           <div class="relative w-48 h-48">
             <img src="/qrcode?chl=${encodeURIComponent(uri)}"
               alt="QR Code"
-              class="absolute top-0 left-0 w-48 h-48 select-none pointer-events-none"
+              class="absolute top-0 left-0 w-48 h-48 select-none pointer-events-none dark:invert dark:hue-rotate-180"
               draggable="false"
             />
             <div class="absolute top-0 left-0 w-48 h-48 bg-transparent"></div>
@@ -117,10 +117,14 @@
     const remaining = period - Math.floor(Date.now() / 1000) % period;
     document.getElementById('countdown').textContent = remaining + 's';
 
-    // Update progress bar
+    // Update progress bar with dark mode colors
     const percent = (remaining / period) * 100;
+    const isDark = document.documentElement.classList.contains('dark');
+    const bgColor = isDark ? 'rgb(124 58 237 / 0.3)' : 'rgb(124 58 237 / 0.1)';
+    const bgColorLight = isDark ? 'rgb(124 58 237 / 0.15)' : 'rgb(124 58 237 / 0.05)';
+
     document.getElementById('countdown').style.background =
-      `linear-gradient(to right, rgb(124 58 237 / 0.1) ${percent}%, rgb(124 58 237 / 0.05) ${percent}%)`;
+      `linear-gradient(to right, ${bgColor} ${percent}%, ${bgColorLight} ${percent}%)`;
   }
 
   // Copy functions dengan feedback visual
@@ -134,7 +138,8 @@
 
     navigator.clipboard.writeText(textToCopy).then(() => {
       const originalColor = button.style.color;
-      button.style.color = '#10B981'; // Success color
+      const isDark = document.documentElement.classList.contains('dark');
+      button.style.color = isDark ? '#34D399' : '#10B981'; // Dark/Light success color
       setTimeout(() => {
         button.style.color = originalColor;
       }, 1000);
