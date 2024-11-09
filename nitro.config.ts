@@ -5,6 +5,9 @@ import { isDevelopment, isProduction } from 'std-env'
 import { env, process, provider } from 'std-env'
 import type { AppConfig } from '~/types/config'
 
+const isCloudflarePages = provider === 'cloudflare_pages'
+const baseURL = isCloudflarePages ? env.CF_PAGES_URL : 'http://localhost:3000'
+
 /* https://nitro.unjs.io/config */
 export default defineNitroConfig({
   compatibilityDate: '2024-11-08',
@@ -57,10 +60,7 @@ export default defineNitroConfig({
   },
 
   appConfig: {
-    baseURL:
-      provider === 'cloudflare_pages'
-        ? env.CF_PAGES_URL
-        : 'http://localhost:3000',
+    baseURL,
     title: 'Auth Web',
     description: 'Online One Time Password (HOTP/TOTP) generator',
     author: 'Aris Ripandi',
