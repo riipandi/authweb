@@ -58,8 +58,10 @@ export default defineNitroConfig({
         { from: undefined }
       )
 
-      // Write hasil CSS ke public directory
+      // Write the compiled CSS to the public directory
       await writeFile(resolve('public/styles.css'), result.css)
+
+      // This is required for Cloudflare Pages to serve the CSS file
       await writeFile(resolve('.output/styles.css'), result.css)
     },
   },
