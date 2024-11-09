@@ -21,14 +21,19 @@
             <div class="flex justify-between items-start w-full p-8">
               {% block heading %}{% endblock %}
             </div>
-            <div class="flex space-x-4 text-white p-8 rounded-tr-lg">
-              <a href="/github" target="_blank" rel="noopener" class="hover:text-gray-800 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 24 24">
+            <div class="flex space-x-4 text-white p-6 sm:p-8 w-full sm:w-auto justify-end sm:justify-start">
+              <a href="/stats" class="hover:text-gray-800 transition-colors" title="Usage Analytics">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6 sm:size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </a>
+              <a href="/github" target="_blank" rel="noopener" class="hover:text-gray-800 transition-colors" title="View Source on GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6 sm:size-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2.163c-5.421 0-9.837 4.416-9.837 9.837 0 4.354 2.813 8.067 6.72 9.372.491.09.672-.214.672-.476 0-.235-.009-.857-.014-1.682-2.737.594-3.313-1.319-3.313-1.319-.447-1.135-1.092-1.439-1.092-1.439-.892-.611.068-.599.068-.599 1.105.078 1.686 1.135 1.686 1.135.982 1.684 2.576 1.198 3.204.917.099-.713.385-1.199.699-1.475-2.187-.248-4.487-1.093-4.487-4.865 0-1.075.384-1.954 1.014-2.644-.101-.248-.439-1.244.096-2.591 0 0 .827-.265 2.707 1.008.785-.218 1.627-.326 2.464-.33.836.004 1.679.112 2.464.33 1.879-1.273 2.706-1.008 2.706-1.008.536 1.347.198 2.343.097 2.591.63.69 1.013 1.569 1.013 2.644 0 3.78-2.303 4.614-4.497 4.855.396.342.75 1.015.75 2.046 0 1.478-.013 2.671-.013 3.034 0 .265.18.57.676.475 3.905-1.308 6.716-5.02 6.716-9.372 0-5.421-4.416-9.837-9.837-9.837z"/>
                 </svg>
               </a>
-              <a href="/x" target="_blank" rel="noopener" class="hover:text-blue-300 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 24 24">
+              <a href="/x" target="_blank" rel="noopener" class="hover:text-blue-300 transition-colors" title="Follow us on X">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6 sm:size-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 4.556c-.884.392-1.832.656-2.828.775 1.017-.611 1.798-1.574 2.165-2.723-.951.564-2.005.974-3.127 1.195-.896-.954-2.172-1.549-3.591-1.549-2.719 0-4.924 2.204-4.924 4.924 0 .386.043.762.127 1.124-4.092-.205-7.719-2.166-10.141-5.144-.424.727-.667 1.57-.667 2.472 0 1.705.869 3.212 2.188 4.096-.807-.026-1.567-.247-2.231-.616v.062c0 2.381 1.693 4.366 3.946 4.818-.412.111-.846.171-1.293.171-.316 0-.624-.031-.924-.088.625 1.953 2.437 3.377 4.584 3.416-1.68 1.316-3.801 2.101-6.102 2.101-.396 0-.786-.023-1.17-.068 2.176 1.395 4.755 2.209 7.527 2.209 9.03 0 13.974-7.483 13.974-13.974 0-.213-.005-.426-.014-.637.961-.695 1.794-1.562 2.453-2.549z"/>
                 </svg>
               </a>
