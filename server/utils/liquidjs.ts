@@ -38,6 +38,8 @@ const MINIFY_OPTIONS: MinifyOptions = {
   removeStyleLinkTypeAttributes: true,
   sortClassName: false,
   useShortDoctype: true,
+  minifyCSS: true,
+  minifyJS: true,
 } as const
 
 /**
