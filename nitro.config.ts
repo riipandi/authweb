@@ -51,7 +51,7 @@ export default defineNitroConfig({
 
   prerender: {
     autoSubfolderIndex: true,
-    crawlLinks: false,
+    crawlLinks: true,
     failOnError: true,
     routes: ['/', '/password', '/privacy', '/terms', '/stats'],
   },
