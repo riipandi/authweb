@@ -1,16 +1,32 @@
-// Reference: https://github.com/manniL/alexander-lichter-nitro-ejs
-
+import { consola } from 'consola'
 import { type Options as MinifyOptions, minify } from 'html-minifier'
 import { Liquid, type LiquidOptions } from 'liquidjs'
 import { resolve } from 'pathe'
 import { isProduction } from 'std-env'
 
-// Storage key for view templates in Nitro
-const TEMPLATE_STORAGE_KEY = 'assets:views'
+const logger = consola.withTag('liquid')
 
-// Templates that should skip caching
-const SKIP_CACHE_TEMPLATES = ['index', 'blog'] as const
-type SkipCacheTemplate = (typeof SKIP_CACHE_TEMPLATES)[number]
+// Configuration constants
+const TEMPLATE_CONFIG = {
+  storageKey: 'assets:views',
+  extension: '.liquid',
+  skipCacheTemplates: ['index', 'blog'] as const,
+  cacheMaxAge: 60 * 60 * 24, // 24 hours
+} as const
+
+type SkipCacheTemplate = (typeof TEMPLATE_CONFIG.skipCacheTemplates)[number]
+
+// Custom error class
+class LiquidTemplateError extends Error {
+  constructor(
+    message: string,
+    public statusCode = 500,
+    public templatePath?: string
+  ) {
+    super(message)
+    this.name = 'LiquidTemplateError'
+  }
+}
 
 /**
  * Configuration for Liquid template engine
@@ -18,12 +34,19 @@ type SkipCacheTemplate = (typeof SKIP_CACHE_TEMPLATES)[number]
 const LIQUID_ENGINE_CONFIG: LiquidOptions = {
   root: [resolve('server/views')],
   cache: !process.dev,
-  extname: '.liquid',
+  extname: TEMPLATE_CONFIG.extension,
   trimTagRight: true,
   strictVariables: true,
   strictFilters: true,
+  globals: {
+    now: new Date(),
+    env: process.env.NODE_ENV,
+  },
 } as const
 
+/**
+ * HTML Minification options
+ */
 const MINIFY_OPTIONS: MinifyOptions = {
   html5: true,
   caseSensitive: true,
@@ -42,55 +65,82 @@ const MINIFY_OPTIONS: MinifyOptions = {
   minifyJS: true,
 } as const
 
+// Template engine instance cache
+let liquidEngine: Liquid | null = null
+
+/**
+ * Gets or creates Liquid engine instance
+ */
+function getLiquidEngine(): Liquid {
+  if (!liquidEngine) {
+    liquidEngine = new Liquid(LIQUID_ENGINE_CONFIG)
+  }
+  return liquidEngine
+}
+
 /**
  * Renders a Liquid template with caching support
- * @param templatePath - Template path to render
- * @param context - Template context data
- * @returns Rendered HTML string
  */
 export const renderCachedTemplate = defineCachedFunction(
   async (templatePath: string, context?: Record<string, unknown>) => {
-    return renderTemplate(templatePath, context)
+    try {
+      return await renderTemplate(templatePath, context)
+    } catch (error) {
+      logger.error({
+        message: 'Template render failed',
+        templatePath,
+        error,
+      })
+      throw error
+    }
   },
   {
     shouldBypassCache: (templatePath: string): boolean => {
-      const shouldSkipCache = SKIP_CACHE_TEMPLATES.includes(
+      const shouldSkipCache = TEMPLATE_CONFIG.skipCacheTemplates.includes(
         templatePath.replace('pages:', '') as SkipCacheTemplate
       )
       const isBlogPost = /^pages:blog\/.+/.test(templatePath)
       return !isProduction || shouldSkipCache || isBlogPost
     },
     name: 'liquid-template',
-    maxAge: 60 * 60 * 24,
+    maxAge: TEMPLATE_CONFIG.cacheMaxAge,
     swr: true,
   }
 )
 
 /**
  * Renders a Liquid template from storage
- * @param templatePath - Template path to render
- * @param context - Template context data
- * @returns Rendered HTML string
  */
 export async function renderTemplate(
   templatePath: string,
   context?: Record<string, unknown>
-) {
-  const templateStorage = useStorage(TEMPLATE_STORAGE_KEY)
+): Promise<string> {
+  const templateStorage = useStorage(TEMPLATE_CONFIG.storageKey)
   const templateContent = await templateStorage.getItem<string>(
-    `${templatePath}.liquid`
+    `${templatePath}${TEMPLATE_CONFIG.extension}`
   )
 
   if (!templateContent) {
-    const message = `Page not found: ${templatePath}`
-    throw createError({ status: 404, message })
+    throw new LiquidTemplateError(
+      `Template not found: ${templatePath}`,
+      404,
+      templatePath
+    )
   }
 
-  const liquidEngine = new Liquid(LIQUID_ENGINE_CONFIG)
-  const htmlContent = await liquidEngine.parseAndRender(
-    templateContent,
-    context
-  )
+  try {
+    const engine = getLiquidEngine()
+    const htmlContent = await engine.parseAndRender(templateContent, {
+      ...context,
+      renderTime: new Date(),
+    })
 
-  return minify(htmlContent, MINIFY_OPTIONS)
+    return minify(htmlContent, MINIFY_OPTIONS)
+  } catch (error) {
+    logger.error(error)
+    throw new LiquidTemplateError('Template render failed', 500, templatePath)
+  }
 }
+
+// Export types
+export type { LiquidTemplateError }
