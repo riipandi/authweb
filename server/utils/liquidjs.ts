@@ -142,5 +142,4 @@ export async function renderTemplate(
   }
 }
 
-// Export types
-export type { LiquidTemplateError }
+export { LiquidTemplateError }
