@@ -60,6 +60,7 @@ export default defineNitroConfig({
 
       // Write hasil CSS ke public directory
       await writeFile(resolve('public/styles.css'), result.css)
+      await writeFile(resolve('.output/styles.css'), result.css)
     },
   },
 

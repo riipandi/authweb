@@ -13,6 +13,7 @@
         "prepare": "nitro prepare",
         "cleanup": "pnpm run --stream --parallel --color \"/cleanup:(?!deps)/\"",
         "cleanup:dev": "pnpm dlx rimraf .{output,data,nitro,wrangler} _{build,data,dist}",
+        "cleanup:articacts": "pnpm dlx rimraf public/styles.css",
         "cleanup:deps": "pnpm dlx rimraf pnpm-lock.yaml node_modules",
         "update-deps": "npm-check-updates --configFileName .ncurc.json",
         "typecheck": "tsc -b --noEmit",
