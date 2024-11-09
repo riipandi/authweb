@@ -2,28 +2,28 @@
 
 {% block 'heading' %}
   <div>
-    <h1 class="text-3xl font-bold text-white">TOTP Generator</h1>
-    <p class="text-violet-100 mt-2">Generate secure time-based one-time passwords</p>
+    <h1 class="text-2xl sm:text-3xl font-bold text-white">TOTP Generator</h1>
+    <p class="text-sm sm:text-base text-violet-100 mt-2">Generate secure time-based one-time passwords</p>
   </div>
 {% endblock %}
 
-<main class="py-8 px-10">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<main class="py-6 sm:py-8 px-4 sm:px-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
     <!-- Left Column - Input Parameters -->
-    <div class="space-y-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Configuration</h2>
+    <div class="space-y-4 sm:space-y-6">
+      <h2 class="text-lg sm:text-xl font-semibold text-gray-800 mb-4">Configuration</h2>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">
           Issuer <span class="text-red-500">*</span>
         </label>
         <input type="text" id="issuer"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           placeholder="e.g., Company Name"
           value="Example Inc."
           required
         />
-        <span id="issuer-error" class="hidden text-sm text-red-500 mt-1">This field is required</span>
+        <span id="issuer-error" class="hidden text-xs sm:text-sm text-red-500 mt-1">This field is required</span>
       </div>
 
       <div>
@@ -31,12 +31,12 @@
           Label <span class="text-red-500">*</span>
         </label>
         <input type="text" id="label"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           placeholder="e.g., john@example.com"
           value="john@example.com"
           required
         />
-        <span id="label-error" class="hidden text-sm text-red-500 mt-1">This field is required</span>
+        <span id="label-error" class="hidden text-xs sm:text-sm text-red-500 mt-1">This field is required</span>
       </div>
 
       <div>
@@ -45,7 +45,7 @@
         </label>
         <div class="relative">
           <input type="text" id="secret"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             placeholder="Enter your secret key"
             required
           />
@@ -57,14 +57,14 @@
             </svg>
           </button>
         </div>
-        <span id="secret-error" class="hidden text-sm text-red-500 mt-1">This field is required</span>
+        <span id="secret-error" class="hidden text-xs sm:text-sm text-red-500 mt-1">This field is required</span>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Algorithm</label>
           <select id="algorithm"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
+            class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
             <option value="SHA1">SHA1</option>
             <option value="SHA256">SHA256</option>
             <option value="SHA512">SHA512</option>
@@ -74,7 +74,7 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Digits</label>
           <select id="digits"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
+            class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent">
             <option value="6">6 digits</option>
             <option value="8">8 digits</option>
           </select>
@@ -84,21 +84,21 @@
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Period (seconds)</label>
         <input type="number" id="period" value="30" min="10" max="300"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         />
       </div>
     </div>
 
     <!-- Right Column - Output & QR -->
-    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+    <div class="bg-gray-50 rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6">
       <div>
         <div class="flex justify-between items-center mb-2">
-          <h3 class="text-lg font-semibold text-gray-800">Current Token</h3>
-          <span id="countdown" class="text-sm font-mono bg-violet-100 text-violet-600 px-2 py-1 rounded">30s</span>
+          <h3 class="text-base sm:text-lg font-semibold text-gray-800">Current Token</h3>
+          <span id="countdown" class="text-xs sm:text-sm font-mono bg-violet-100 text-violet-600 px-2 py-1 rounded">30s</span>
         </div>
         <div class="relative">
           <input type="text" id="totpToken" readonly value="000 000"
-            class="w-full px-4 py-3 text-2xl tracking-wider font-mono text-center border border-gray-200 rounded-lg bg-white"
+            class="w-full px-3 sm:px-4 py-2 sm:py-3 text-xl sm:text-2xl tracking-wider font-mono text-center border border-gray-200 rounded-lg bg-white"
           />
           <button id="copyToken"
             class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-violet-600"
@@ -112,14 +112,16 @@
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">QR Code</h3>
-        <div id="qrcode" class="bg-white p-4 rounded-lg border border-gray-200 flex items-center justify-center relative select-none">
-          <div class="w-48 h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+        <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-2">QR Code</h3>
+        <div id="qrcode" class="bg-white p-3 sm:p-4 rounded-lg border border-gray-200 flex items-center justify-center relative select-none">
+          <div class="w-36 h-36 sm:w-48 sm:h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
             <img src="/qrcode?chl=otpauth://totp/Example:john@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Example"
               alt="QR Code"
-              class="w-48 h-48 pointer-events-none"
-              draggable="false"
+              class="w-36 h-36 sm:w-48 sm:h-48 pointer-events-none"
+              width="192"
+              height="192"
               oncontextmenu="return false"
+              draggable="false"
             />
           </div>
           <div class="absolute inset-0" oncontextmenu="return false"></div>
@@ -127,10 +129,10 @@
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">TOTP URI</h3>
+        <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-2">TOTP URI</h3>
         <div class="relative">
           <input type="text" id="totpUri" readonly
-            class="w-full pl-4 pr-9 py-2 text-sm font-mono border border-gray-200 rounded-lg bg-white"
+            class="w-full pl-3 sm:pl-4 pr-9 py-2 text-xs sm:text-sm font-mono border border-gray-200 rounded-lg bg-white"
             value=""
             placeholder="otpauth://totp/issuer:account?secret=secretkey&issuer=issuer"
           />
@@ -150,186 +152,5 @@
 
 
 {% block 'footerScript' %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/otpauth/9.3.4/otpauth.umd.min.js"></script>
-  <script>
-    let isFirstLoad = true;
-    let validationTimeout;
-
-    // Generate random secret
-    function generateRandomSecret() {
-      const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-      let secret = '';
-      for (let i = 0; i < 16; i++) {
-        secret += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      document.getElementById('secret').value = secret;
-      document.getElementById('secret').classList.remove('border-red-500');
-      document.getElementById('secret-error').classList.add('hidden');
-      generateTOTP();
-      return secret;
-    }
-
-    // Validate single field with debounce
-    function validateField(id, shouldShowError = true) {
-      const element = document.getElementById(id);
-      const errorElement = document.getElementById(`${id}-error`);
-      const isValid = element.value.trim() !== '';
-
-      if (!isValid && shouldShowError && !isFirstLoad) {
-        element.classList.add('border-red-500');
-        errorElement.classList.remove('hidden');
-      } else {
-        element.classList.remove('border-red-500');
-        errorElement.classList.add('hidden');
-      }
-
-      return isValid;
-    }
-
-    // Validate all required fields
-    function validateForm(shouldShowError = true) {
-      const fields = ['issuer', 'label', 'secret'];
-      return fields.map(field => validateField(field, shouldShowError)).every(Boolean);
-    }
-
-    // Debounced validation
-    function debouncedValidation(shouldShowError = true) {
-      clearTimeout(validationTimeout);
-      validationTimeout = setTimeout(() => {
-        generateTOTP(shouldShowError);
-      }, 300);
-    }
-
-    // Generate TOTP token
-    function generateTOTP(shouldShowError = false) {
-      const isValid = validateForm(shouldShowError);
-
-      const issuer = document.getElementById('issuer').value;
-      const label = document.getElementById('label').value;
-      const secret = document.getElementById('secret').value;
-      const algorithm = document.getElementById('algorithm').value;
-      const digits = parseInt(document.getElementById('digits').value);
-      const period = parseInt(document.getElementById('period').value);
-
-      if (!isValid) {
-        document.getElementById('totpToken').value = '000 000';
-        document.getElementById('totpUri').value = '';
-        document.getElementById('qrcode').innerHTML = `
-          <div class="w-48 h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
-            <span class="text-sm text-center px-4">Fill in the required fields to generate QR code</span>
-          </div>
-        `;
-        return;
-      }
-
-      try {
-        // Create TOTP object
-        const totp = new OTPAuth.TOTP({
-          issuer: issuer,
-          label: label,
-          algorithm: algorithm,
-          digits: digits,
-          period: period,
-          secret: OTPAuth.Secret.fromBase32(secret)
-        });
-
-        // Generate token
-        const token = totp.generate();
-
-        // Update token display with space after 3 digits
-        const formattedToken = token.replace(/(\d{3})/, '$1 ');
-        document.getElementById('totpToken').value = formattedToken;
-
-        // Update QR code and URI
-        const uri = totp.toString();
-        document.getElementById('totpUri').value = uri;
-
-        // Generate protected QR code
-        if (issuer && label && secret) {
-          document.getElementById('qrcode').innerHTML = `
-            <div class="relative w-48 h-48">
-              <img src="/qrcode?chl=${encodeURIComponent(uri)}"
-                alt="QR Code"
-                class="absolute top-0 left-0 w-48 h-48 select-none pointer-events-none"
-                draggable="false"
-              />
-              <div class="absolute top-0 left-0 w-48 h-48 bg-transparent"></div>
-            </div>
-          `;
-        }
-      } catch (error) {
-        console.error('Error generating TOTP:', error);
-        document.getElementById('totpToken').value = '000 000';
-      }
-    }
-
-    // Countdown timer
-    function updateCountdown() {
-      const period = parseInt(document.getElementById('period').value) || 30;
-      const remaining = period - Math.floor(Date.now() / 1000) % period;
-      document.getElementById('countdown').textContent = remaining + 's';
-
-      // Update progress bar
-      const percent = (remaining / period) * 100;
-      document.getElementById('countdown').style.background =
-        `linear-gradient(to right, rgb(124 58 237 / 0.1) ${percent}%, rgb(124 58 237 / 0.05) ${percent}%)`;
-    }
-
-    // Copy functions dengan feedback visual
-    function copyWithFeedback(elementId, buttonId) {
-      const element = document.getElementById(elementId);
-      const button = document.getElementById(buttonId);
-
-      const textToCopy = elementId === 'totpToken'
-        ? element.value.replace(/\s/g, '')
-        : element.value;
-
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const originalColor = button.style.color;
-        button.style.color = '#10B981'; // Success color
-        setTimeout(() => {
-          button.style.color = originalColor;
-        }, 1000);
-      });
-    }
-
-    // Event listeners
-    document.getElementById('generateSecret').addEventListener('click', generateRandomSecret);
-
-    document.getElementById('copyToken').addEventListener('click', () => {
-      copyWithFeedback('totpToken', 'copyToken');
-    });
-
-    document.getElementById('copyUri').addEventListener('click', () => {
-      copyWithFeedback('totpUri', 'copyUri');
-    });
-
-    // Add input event listeners for all form fields
-    const inputs = ['issuer', 'label', 'secret', 'algorithm', 'digits', 'period'];
-    for (const inputId of inputs) {
-      const element = document.getElementById(inputId);
-      element.addEventListener('input', () => {
-        debouncedValidation(true);
-      });
-      element.addEventListener('change', () => {
-        debouncedValidation(true);
-      });
-    }
-
-    // Handle select elements specifically
-    document.getElementById('algorithm').addEventListener('change', () => debouncedValidation(true));
-    document.getElementById('digits').addEventListener('change', () => debouncedValidation(true));
-
-    // Initialize
-    generateTOTP(false);
-    setInterval(() => {
-      generateTOTP(false);
-      updateCountdown();
-    }, 1000);
-
-    // Set firstLoad to false after initial render
-    setTimeout(() => {
-      isFirstLoad = false;
-    }, 1000);
-  </script>
+  {% render 'partials/totp-generator-script' %}
 {% endblock %}

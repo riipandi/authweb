@@ -1,0 +1,182 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/otpauth/9.3.4/otpauth.umd.min.js"></script>
+<script>
+  let isFirstLoad = true;
+  let validationTimeout;
+
+  // Generate random secret
+  function generateRandomSecret() {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+    let secret = '';
+    for (let i = 0; i < 16; i++) {
+      secret += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    document.getElementById('secret').value = secret;
+    document.getElementById('secret').classList.remove('border-red-500');
+    document.getElementById('secret-error').classList.add('hidden');
+    generateTOTP();
+    return secret;
+  }
+
+  // Validate single field with debounce
+  function validateField(id, shouldShowError = true) {
+    const element = document.getElementById(id);
+    const errorElement = document.getElementById(`${id}-error`);
+    const isValid = element.value.trim() !== '';
+
+    if (!isValid && shouldShowError && !isFirstLoad) {
+      element.classList.add('border-red-500');
+      errorElement.classList.remove('hidden');
+    } else {
+      element.classList.remove('border-red-500');
+      errorElement.classList.add('hidden');
+    }
+
+    return isValid;
+  }
+
+  // Validate all required fields
+  function validateForm(shouldShowError = true) {
+    const fields = ['issuer', 'label', 'secret'];
+    return fields.map(field => validateField(field, shouldShowError)).every(Boolean);
+  }
+
+  // Debounced validation
+  function debouncedValidation(shouldShowError = true) {
+    clearTimeout(validationTimeout);
+    validationTimeout = setTimeout(() => {
+      generateTOTP(shouldShowError);
+    }, 300);
+  }
+
+  // Generate TOTP token
+  function generateTOTP(shouldShowError = false) {
+    const isValid = validateForm(shouldShowError);
+
+    const issuer = document.getElementById('issuer').value;
+    const label = document.getElementById('label').value;
+    const secret = document.getElementById('secret').value;
+    const algorithm = document.getElementById('algorithm').value;
+    const digits = parseInt(document.getElementById('digits').value);
+    const period = parseInt(document.getElementById('period').value);
+
+    if (!isValid) {
+      document.getElementById('totpToken').value = '000 000';
+      document.getElementById('totpUri').value = '';
+      document.getElementById('qrcode').innerHTML = `
+        <div class="w-48 h-48 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+          <span class="text-sm text-center px-4">Fill in the required fields to generate QR code</span>
+        </div>
+      `;
+      return;
+    }
+
+    try {
+      // Create TOTP object
+      const totp = new OTPAuth.TOTP({
+        issuer: issuer,
+        label: label,
+        algorithm: algorithm,
+        digits: digits,
+        period: period,
+        secret: OTPAuth.Secret.fromBase32(secret)
+      });
+
+      // Generate token
+      const token = totp.generate();
+
+      // Update token display with space after 3 digits
+      const formattedToken = token.replace(/(\d{3})/, '$1 ');
+      document.getElementById('totpToken').value = formattedToken;
+
+      // Update QR code and URI
+      const uri = totp.toString();
+      document.getElementById('totpUri').value = uri;
+
+      // Generate protected QR code
+      if (issuer && label && secret) {
+        document.getElementById('qrcode').innerHTML = `
+          <div class="relative w-48 h-48">
+            <img src="/qrcode?chl=${encodeURIComponent(uri)}"
+              alt="QR Code"
+              class="absolute top-0 left-0 w-48 h-48 select-none pointer-events-none"
+              draggable="false"
+            />
+            <div class="absolute top-0 left-0 w-48 h-48 bg-transparent"></div>
+          </div>
+        `;
+      }
+    } catch (error) {
+      console.error('Error generating TOTP:', error);
+      document.getElementById('totpToken').value = '000 000';
+    }
+  }
+
+  // Countdown timer
+  function updateCountdown() {
+    const period = parseInt(document.getElementById('period').value) || 30;
+    const remaining = period - Math.floor(Date.now() / 1000) % period;
+    document.getElementById('countdown').textContent = remaining + 's';
+
+    // Update progress bar
+    const percent = (remaining / period) * 100;
+    document.getElementById('countdown').style.background =
+      `linear-gradient(to right, rgb(124 58 237 / 0.1) ${percent}%, rgb(124 58 237 / 0.05) ${percent}%)`;
+  }
+
+  // Copy functions dengan feedback visual
+  function copyWithFeedback(elementId, buttonId) {
+    const element = document.getElementById(elementId);
+    const button = document.getElementById(buttonId);
+
+    const textToCopy = elementId === 'totpToken'
+      ? element.value.replace(/\s/g, '')
+      : element.value;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const originalColor = button.style.color;
+      button.style.color = '#10B981'; // Success color
+      setTimeout(() => {
+        button.style.color = originalColor;
+      }, 1000);
+    });
+  }
+
+  // Event listeners
+  document.getElementById('generateSecret').addEventListener('click', generateRandomSecret);
+
+  document.getElementById('copyToken').addEventListener('click', () => {
+    copyWithFeedback('totpToken', 'copyToken');
+  });
+
+  document.getElementById('copyUri').addEventListener('click', () => {
+    copyWithFeedback('totpUri', 'copyUri');
+  });
+
+  // Add input event listeners for all form fields
+  const inputs = ['issuer', 'label', 'secret', 'algorithm', 'digits', 'period'];
+  for (const inputId of inputs) {
+    const element = document.getElementById(inputId);
+    element.addEventListener('input', () => {
+      debouncedValidation(true);
+    });
+    element.addEventListener('change', () => {
+      debouncedValidation(true);
+    });
+  }
+
+  // Handle select elements specifically
+  document.getElementById('algorithm').addEventListener('change', () => debouncedValidation(true));
+  document.getElementById('digits').addEventListener('change', () => debouncedValidation(true));
+
+  // Initialize
+  generateTOTP(false);
+  setInterval(() => {
+    generateTOTP(false);
+    updateCountdown();
+  }, 1000);
+
+  // Set firstLoad to false after initial render
+  setTimeout(() => {
+    isFirstLoad = false;
+  }, 1000);
+</script>
