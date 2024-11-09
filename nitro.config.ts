@@ -38,8 +38,8 @@ export default defineNitroConfig({
   },
 
   hooks: {
-    compiled: async () => {
-      consola.info('Generating CSS file...')
+    'rollup:before': async () => {
+      consola.info('Compiling Tailwind CSS file...')
 
       const { default: postcss } = await import('postcss')
       const { default: tailwindcss } = await import('tailwindcss')
