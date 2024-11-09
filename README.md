@@ -1,5 +1,3 @@
-# AuthWeb
-
 <p align="center">
   <img src="./public/favicon.svg" width="80" height="80" alt="AuthWeb logo">
 </p>
