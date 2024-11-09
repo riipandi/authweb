@@ -8,6 +8,7 @@ import type { AppConfig } from '~/types/config'
 
 const isCloudflarePages = provider === 'cloudflare_pages'
 const baseURL = isCloudflarePages ? env.CF_PAGES_URL : 'http://localhost:3000'
+const plausibleURL = env.PLAUSIBLE_BASE_URL
 
 /* https://nitro.unjs.io/config */
 export default defineNitroConfig({
@@ -26,15 +27,16 @@ export default defineNitroConfig({
     autoSubfolderIndex: true,
     crawlLinks: false,
     failOnError: true,
-    routes: ['/', '/password', '/privacy', '/terms'],
+    routes: ['/', '/password', '/privacy', '/terms', '/stats'],
   },
 
   routeRules: {
     '/author': { redirect: 'https://ripandis.com/?utm_source=authweb' },
     '/github': { redirect: 'https://github.com/riipandi/authweb' },
     '/x': { redirect: 'https://x.com/intent/follow?screen_name=riipandi' },
-    '/js/script.js': { proxy: 'https://stats.web.id/js/script.js' },
-    '/api/event': { proxy: 'https://stats.web.id/api/event' },
+    '/js/embed.host.js': { proxy: `${plausibleURL}/js/embed.host.js` },
+    '/js/script.js': { proxy: `${plausibleURL}/js/script.js` },
+    '/api/event': { proxy: `${plausibleURL}/api/event` },
   },
 
   hooks: {
