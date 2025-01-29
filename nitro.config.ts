@@ -8,7 +8,7 @@ import type { AppConfig } from '~/types/config'
 
 const isCloudflarePages = provider === 'cloudflare_pages'
 const baseURL = isCloudflarePages ? env.CF_PAGES_URL : 'http://localhost:3000'
-const plausibleURL = env.PLAUSIBLE_BASE_URL
+const umamiURL = env.UMAMI_BASE_URL
 
 // Create a reusable function for Tailwind compilation
 const compileTailwind = async () => {
@@ -42,7 +42,7 @@ const compileTailwind = async () => {
 
 /* https://nitro.unjs.io/config */
 export default defineNitroConfig({
-  compatibilityDate: '2024-11-08',
+  compatibilityDate: '2024-11-11',
   srcDir: 'server',
   preset: 'cloudflare-pages',
   minify: isProduction,
@@ -73,9 +73,7 @@ export default defineNitroConfig({
       redirect: 'https://x.com/intent/follow?screen_name=riipandi',
       prerender: false,
     },
-    '/js/embed.host.js': { proxy: `${plausibleURL}/js/embed.host.js` },
-    '/js/script.js': { proxy: `${plausibleURL}/js/script.js` },
-    '/api/event': { proxy: `${plausibleURL}/api/event` },
+    '/js/script.js': { proxy: `${umamiURL}/script.js` },
   },
 
   hooks: {
@@ -93,6 +91,7 @@ export default defineNitroConfig({
     description:
       'Free online TOTP/HOTP generator and password manager. Create secure one-time passwords and 2FA tokens directly in your browser. Open source, privacy-focused, and no registration required.',
     author: 'Aris Ripandi',
-    siteDomain: env.PLAUSIBLE_DATA_DOMAIN,
+    siteDomain: env.UMAMI_DATA_DOMAIN,
+    umamiWebsiteId: env.UMAMI_WEBSITE_ID,
   } as AppConfig,
 })

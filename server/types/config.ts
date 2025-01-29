@@ -4,4 +4,5 @@ export interface AppConfig {
   description: string
   author: string
   siteDomain: string
+  umamiWebsiteId: string
 }

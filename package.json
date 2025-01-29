@@ -20,16 +20,16 @@
         "wrangler": "wrangler"
     },
     "dependencies": {
-        "consola": "^3.2.3",
-        "h3": "^1.13.0",
+        "consola": "^3.4.0",
+        "h3": "^1.14.0",
         "html-minifier": "^4.0.0",
-        "liquidjs": "^10.18.0",
+        "liquidjs": "^10.20.2",
         "ohash": "^1.1.4",
-        "pathe": "^1.1.2",
+        "pathe": "^2.0.2",
         "std-env": "^3.8.0",
         "ufo": "^1.5.4",
         "uqr": "^0.1.2",
-        "zod": "^3.23.8"
+        "zod": "^3.24.1"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
@@ -37,11 +37,11 @@
         "cssnano": "^7.0.6",
         "make-dir": "^5.0.0",
         "nitropack": "^2.10.4",
-        "npm-check-updates": "17.1.10",
-        "postcss": "^8.4.47",
+        "npm-check-updates": "17.1.14",
+        "postcss": "^8.5.1",
         "tailwindcss": "^3.4.14",
-        "typescript": "^5.6.3",
-        "wrangler": "^3.86.0"
+        "typescript": "^5.7.3",
+        "wrangler": "^3.106.0"
     },
-    "packageManager": "pnpm@9.12.3"
+    "packageManager": "pnpm@9.15.4"
 }

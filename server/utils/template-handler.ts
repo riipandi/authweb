@@ -32,6 +32,7 @@ export function createTemplateHandler(pageMeta?: PageMeta) {
         currentPath: event.path,
         renderTimestamp: Date.now(),
         siteDomain: appConfig.siteDomain || 'auth.web.id',
+        umamiWebsiteId: appConfig.umamiWebsiteId || '',
         ...extraContext,
       }
 

@@ -80,7 +80,7 @@ export default defineNitroErrorHandler((error, event) => {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/styles.css">
-    <script defer data-domain="${appConfig.siteDomain}" src="/js/script.js"></script>
+    <script defer data-website-id="${appConfig.umamiWebsiteId}" src="/js/script.js"></script>
   </head>
   <body class="bg-gradient-to-br from-white to-gray-100 min-h-screen flex items-center justify-center p-4">
     <main class="max-w-4xl w-full mx-auto bg-white rounded-xl shadow-sm p-8 border border-gray-100">
