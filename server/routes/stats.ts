@@ -11,10 +11,10 @@ export default defineEventHandler(
     title: 'Public Stats',
     extraContext: {
       embedURL: withQuery(embedBaseURL, {
-        auth: embedAuth,
-        embed: true,
+        // embed: true,
+        // auth: embedAuth,
+        // width: 'manual',
         theme: 'system',
-        width: 'manual',
       }),
     },
   })

@@ -1,7 +1,7 @@
 // Check system preference and localStorage
 function syncThemeWithIframe(theme) {
-  // Get all plausible iframes
-  const iframes = document.querySelectorAll('iframe[plausible-embed]');
+  // Get all Umami iframes
+  const iframes = document.querySelectorAll('iframe[umami-embed]');
   for (const iframe of iframes) {
     const currentSrc = new URL(iframe.src);
     currentSrc.searchParams.set('theme', theme);
